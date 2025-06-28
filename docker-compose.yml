@@ -1,0 +1,134 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: comchat_postgres
+    environment:
+      POSTGRES_DB: comchat
+      POSTGRES_USER: comchat_user
+      POSTGRES_PASSWORD: comchat_password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U comchat_user -d comchat"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Redis for caching and message queues
+  redis:
+    image: redis:7-alpine
+    container_name: comchat_redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Qdrant Vector Database
+  qdrant:
+    image: qdrant/qdrant:latest
+    container_name: comchat_qdrant
+    ports:
+      - "6333:6333"
+    volumes:
+      - qdrant_data:/qdrant/storage
+    environment:
+      QDRANT__SERVICE__HTTP_PORT: 6333
+
+  # FastAPI Backend
+  backend:
+    build: 
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: comchat_backend
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql://comchat_user:comchat_password@postgres:5432/comchat
+      - REDIS_URL=redis://redis:6379
+      - QDRANT_URL=http://qdrant:6333
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    volumes:
+      - ./backend:/app
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+
+  # React Frontend
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: comchat_frontend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    depends_on:
+      - backend
+
+  # Telegram Bot Adapter
+  telegram-adapter:
+    build:
+      context: ./messaging-adapters/telegram
+      dockerfile: Dockerfile
+    container_name: comchat_telegram
+    environment:
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+      - BACKEND_URL=http://backend:8000
+    depends_on:
+      - backend
+      - redis
+
+  # WhatsApp Bot Adapter
+  whatsapp-adapter:
+    build:
+      context: ./messaging-adapters/whatsapp
+      dockerfile: Dockerfile
+    container_name: comchat_whatsapp
+    environment:
+      - WHATSAPP_ACCESS_TOKEN=${WHATSAPP_ACCESS_TOKEN}
+      - WHATSAPP_VERIFY_TOKEN=${WHATSAPP_VERIFY_TOKEN}
+      - BACKEND_URL=http://backend:8000
+    depends_on:
+      - backend
+      - redis
+    ports:
+      - "3001:3001"
+
+  # Ollama for local AI models
+  ollama:
+    image: ollama/ollama:latest
+    container_name: comchat_ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    environment:
+      - OLLAMA_KEEP_ALIVE=24h
+    # For GPU support (uncomment if you have NVIDIA GPU)
+    # runtime: nvidia
+    # environment:
+    #   - NVIDIA_VISIBLE_DEVICES=all
+
+volumes:
+  postgres_data:
+  redis_data:
+  qdrant_data:
+  ollama_data:
+
+networks:
+  default:
+    name: comchat_network

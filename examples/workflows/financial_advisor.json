@@ -1,0 +1,44 @@
+{
+    "name": "Financial Advisory Workflow",
+    "domain": "finance",
+    "description": "Provides personalized financial advice and investment recommendations",
+    "trigger_conditions": {
+        "intent": "financial_advice",
+        "user_type": "premium"
+    },
+    "initial_context": {
+        "compliance_mode": "SOX",
+        "risk_assessment_required": true
+    },
+    "step_definitions": [
+        {
+            "name": "Financial Profile Assessment",
+            "step_type": "prompt",
+            "order_index": 0,
+            "prompt_template": "finance_profile",
+            "input_mapping": {
+                "user_query": "context.user_message",
+                "financial_goals": "context.goals"
+            },
+            "output_mapping": {
+                "risk_tolerance": "risk_level",
+                "investment_timeline": "timeline",
+                "recommended_strategy": "strategy"
+            }
+        },
+        {
+            "name": "Compliance Check",
+            "step_type": "condition",
+            "order_index": 1,
+            "config": {
+                "conditions": [
+                    {
+                        "left": "context.investment_amount",
+                        "operator": "greater_than",
+                        "right": 10000
+                    }
+                ]
+            }
+        }
+    ]
+}

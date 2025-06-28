@@ -1,0 +1,19 @@
+{
+    "templates": [
+        {
+            "name": "Healthcare Intake",
+            "category": "healthcare",
+            "template_content": "You are a medical intake assistant. Based on the patient's message: '{{patient_message}}' and symptoms: '{{symptoms}}', provide:\n1. Urgency level (1-10)\n2. Specialist type needed\n3. Preliminary assessment\n\nEnsure HIPAA compliance and professional tone.",
+            "variables": ["patient_message", "symptoms"],
+            "compliance_tags": ["HIPAA"],
+            "preferred_model": "llama3.2:3b"
+        },
+        {
+            "name": "Symptom Checker",
+            "category": "healthcare",
+            "template_content": "As a healthcare AI assistant, analyze these symptoms: {{symptoms}}. Provide possible causes and urgency level. Always recommend consulting a healthcare professional. Do not provide definitive diagnoses.",
+            "variables": ["symptoms"],
+            "compliance_tags": ["HIPAA", "FDA"]
+        }
+    ]
+}

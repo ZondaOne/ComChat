@@ -1,0 +1,11 @@
+.env
+.env.example
+*.sh
+/venv
+/backend/venv
+/frontend/node_modules
+/frontend/dist
+/messaging-adapters/telegram/node_modules
+/messaging-adapters/whatsapp/node_modules
+/frontend-old
+*.pyc

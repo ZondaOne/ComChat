@@ -1,0 +1,12 @@
+{
+    "templates": [
+        {
+            "name": "Financial Profile Assessment",
+            "category": "finance",
+            "template_content": "You are a financial advisor AI. Based on the user's query: '{{user_query}}' and goals: '{{financial_goals}}', provide:\n1. Risk tolerance assessment\n2. Investment timeline recommendation\n3. Suggested investment strategy\n\nEnsure compliance with financial regulations and provide disclaimers.",
+            "variables": ["user_query", "financial_goals"],
+            "compliance_tags": ["SOX", "FINRA"],
+            "preferred_model": "phi3:mini"
+        }
+    ]
+}

@@ -1,0 +1,58 @@
+{
+    "name": "Healthcare Consultation Workflow",
+    "domain": "healthcare",
+    "description": "Handles patient consultation requests with triage and specialist routing",
+    "trigger_conditions": {
+        "channel": "web",
+        "intent": "medical_consultation"
+    },
+    "initial_context": {
+        "compliance_mode": "HIPAA",
+        "escalation_threshold": 0.7
+    },
+    "step_definitions": [
+        {
+            "name": "Patient Intake",
+            "step_type": "prompt",
+            "order_index": 0,
+            "prompt_template": "healthcare_intake",
+            "input_mapping": {
+                "patient_message": "context.user_message",
+                "symptoms": "context.symptoms"
+            },
+            "output_mapping": {
+                "urgency_level": "urgency",
+                "specialist_needed": "specialist",
+                "preliminary_assessment": "assessment"
+            }
+        },
+        {
+            "name": "Urgency Check",
+            "step_type": "condition",
+            "order_index": 1,
+            "config": {
+                "conditions": [
+                    {
+                        "left": "context.urgency_level",
+                        "operator": "greater_than",
+                        "right": 8
+                    }
+                ]
+            }
+        },
+        {
+            "name": "Emergency Response",
+            "step_type": "action",
+            "order_index": 2,
+            "config": {
+                "action_type": "webhook",
+                "webhook_url": "https://your-emergency-system.com/alert",
+                "payload": {
+                    "patient_id": "{{context.patient_id}}",
+                    "urgency": "{{context.urgency_level}}",
+                    "symptoms": "{{context.symptoms}}"
+                }
+            }
+        }
+    ]
+}
