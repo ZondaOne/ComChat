@@ -71,34 +71,48 @@ const AdminDashboard: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mx-auto"></div>
-          <p className="mt-4 text-gray-600">Loading dashboard...</p>
+      <div className="min-h-screen bg-surface-secondary flex items-center justify-center">
+        <div className="text-center animate-fade-in">
+          <div className="w-16 h-16 bg-gradient-to-r from-brand-500 to-brand-600 rounded-3xl mx-auto mb-6 flex items-center justify-center animate-pulse-subtle">
+            <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+            </svg>
+          </div>
+          <h3 className="text-xl font-display font-semibold text-gray-900 mb-2">Loading Dashboard</h3>
+          <p className="text-gray-600">Gathering your analytics data...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-surface-secondary">
       {/* Header */}
-      <div className="bg-white shadow">
+      <div className="bg-surface-elevated backdrop-blur-xl border-b border-gray-200/50 animate-slide-down">
         <div className="px-4 sm:px-6 lg:max-w-7xl lg:mx-auto lg:px-8">
-          <div className="py-6">
+          <div className="py-8">
             <div className="flex items-center justify-between">
-              <div>
-                <h1 className="text-2xl font-bold text-gray-900">
-                  ComChat Dashboard
-                </h1>
-                <p className="mt-1 text-sm text-gray-500">
-                  Monitor your chatbot performance and manage settings
-                </p>
+              <div className="animate-fade-in-up">
+                <div className="flex items-center space-x-4 mb-4">
+                  <div className="w-14 h-14 bg-gradient-to-br from-brand-500 to-brand-600 rounded-2xl flex items-center justify-center shadow-apple">
+                    <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h1 className="text-3xl font-display font-bold text-gradient">
+                      ComChat Dashboard
+                    </h1>
+                    <p className="text-lg text-gray-600 mt-1">
+                      Monitor performance and manage your AI-powered customer support
+                    </p>
+                  </div>
+                </div>
               </div>
-              <div className="flex space-x-3">
-                <button className="bg-primary-600 text-white px-4 py-2 rounded-lg hover:bg-primary-700">
-                  <CogIcon className="h-4 w-4 inline mr-2" />
-                  Settings
+              <div className="flex space-x-3 animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
+                <button className="btn-primary flex items-center space-x-2">
+                  <CogIcon className="h-5 w-5" />
+                  <span>Settings</span>
                 </button>
               </div>
             </div>
@@ -107,7 +121,7 @@ const AdminDashboard: React.FC = () => {
       </div>
 
       {/* Navigation Tabs */}
-      <div className="bg-white border-b">
+      <div className="bg-surface-elevated backdrop-blur-xl border-b border-gray-200/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <nav className="flex space-x-8">
             {[
@@ -116,15 +130,16 @@ const AdminDashboard: React.FC = () => {
               { id: 'workflows', name: 'Workflows', icon: CircleStackIcon },
               { id: 'channels', name: 'Channels', icon: ComputerDesktopIcon },
               { id: 'billing', name: 'Billing', icon: CurrencyDollarIcon },
-            ].map((tab) => (
+            ].map((tab, index) => (
               <button
                 key={tab.id}
                 onClick={() => setSelectedTab(tab.id)}
-                className={`flex items-center py-4 px-1 border-b-2 font-medium text-sm ${
+                className={`flex items-center py-5 px-3 border-b-2 font-medium text-sm rounded-t-xl transition-all duration-200 animate-fade-in-up ${
                   selectedTab === tab.id
-                    ? 'border-primary-500 text-primary-600'
-                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                    ? 'border-brand-500 text-brand-600 bg-surface-primary/50'
+                    : 'border-transparent text-gray-600 hover:text-gray-900 hover:border-gray-300 hover:bg-surface-primary/30'
                 }`}
+                style={{ animationDelay: `${index * 0.1}s` }}
               >
                 <tab.icon className="h-5 w-5 mr-2" />
                 {tab.name}
@@ -140,122 +155,135 @@ const AdminDashboard: React.FC = () => {
           <div className="space-y-8">
             {/* Key Metrics */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              <div className="bg-white rounded-lg shadow p-6">
+              <div className="card p-6 group animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
                 <div className="flex items-center">
                   <div className="flex-shrink-0">
-                    <ChatBubbleLeftIcon className="h-8 w-8 text-blue-600" />
+                    <div className="w-14 h-14 bg-gradient-to-br from-brand-500 to-brand-600 rounded-2xl flex items-center justify-center shadow-apple group-hover:scale-110 transition-transform duration-300">
+                      <ChatBubbleLeftIcon className="h-7 w-7 text-white" />
+                    </div>
                   </div>
                   <div className="ml-5 w-0 flex-1">
                     <dl>
-                      <dt className="text-sm font-medium text-gray-500 truncate">
+                      <dt className="text-sm font-medium text-gray-600 truncate">
                         Total Conversations
                       </dt>
-                      <dd className="text-lg font-medium text-gray-900">
+                      <dd className="text-3xl font-display font-bold text-gray-900 mt-1">
                         {formatNumber(analytics.conversations.total_conversations)}
                       </dd>
                     </dl>
                   </div>
                 </div>
-                <div className="mt-4">
-                  <div className="text-sm text-gray-600">
-                    {analytics.conversations.conversations_today} today, {analytics.conversations.conversations_this_week} this week
+                <div className="mt-5 p-3 bg-surface-secondary rounded-xl">
+                  <div className="text-sm text-gray-700 font-medium">
+                    <span className="text-brand-600">{analytics.conversations.conversations_today}</span> today, <span className="text-brand-600">{analytics.conversations.conversations_this_week}</span> this week
                   </div>
                 </div>
               </div>
 
-              <div className="bg-white rounded-lg shadow p-6">
+              <div className="card p-6 group animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
                 <div className="flex items-center">
                   <div className="flex-shrink-0">
-                    <ChatBubbleLeftIcon className="h-8 w-8 text-green-600" />
+                    <div className="w-14 h-14 bg-gradient-to-br from-accent-green to-accent-mint rounded-2xl flex items-center justify-center shadow-apple group-hover:scale-110 transition-transform duration-300">
+                      <ChatBubbleLeftIcon className="h-7 w-7 text-white" />
+                    </div>
                   </div>
                   <div className="ml-5 w-0 flex-1">
                     <dl>
-                      <dt className="text-sm font-medium text-gray-500 truncate">
+                      <dt className="text-sm font-medium text-gray-600 truncate">
                         Messages Today
                       </dt>
-                      <dd className="text-lg font-medium text-gray-900">
+                      <dd className="text-3xl font-display font-bold text-gray-900 mt-1">
                         {formatNumber(analytics.messages.messages_today)}
                       </dd>
                     </dl>
                   </div>
                 </div>
-                <div className="mt-4">
-                  <div className="text-sm text-gray-600">
-                    {formatNumber(analytics.messages.total_messages)} total messages
+                <div className="mt-5 p-3 bg-surface-secondary rounded-xl">
+                  <div className="text-sm text-gray-700 font-medium">
+                    <span className="text-accent-green">{formatNumber(analytics.messages.total_messages)}</span> total messages
                   </div>
                 </div>
               </div>
 
-              <div className="bg-white rounded-lg shadow p-6">
+              <div className="card p-6 group animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
                 <div className="flex items-center">
                   <div className="flex-shrink-0">
-                    <UserGroupIcon className="h-8 w-8 text-purple-600" />
+                    <div className="w-14 h-14 bg-gradient-to-br from-accent-purple to-accent-pink rounded-2xl flex items-center justify-center shadow-apple group-hover:scale-110 transition-transform duration-300">
+                      <UserGroupIcon className="h-7 w-7 text-white" />
+                    </div>
                   </div>
                   <div className="ml-5 w-0 flex-1">
                     <dl>
-                      <dt className="text-sm font-medium text-gray-500 truncate">
+                      <dt className="text-sm font-medium text-gray-600 truncate">
                         Active Conversations
                       </dt>
-                      <dd className="text-lg font-medium text-gray-900">
+                      <dd className="text-3xl font-display font-bold text-gray-900 mt-1">
                         {formatNumber(analytics.conversations.active_conversations)}
                       </dd>
                     </dl>
                   </div>
                 </div>
-                <div className="mt-4">
-                  <div className="text-sm text-gray-600">
-                    Avg {analytics.conversations.avg_messages_per_conversation.toFixed(1)} messages/conversation
+                <div className="mt-5 p-3 bg-surface-secondary rounded-xl">
+                  <div className="text-sm text-gray-700 font-medium">
+                    Avg <span className="text-accent-purple">{analytics.conversations.avg_messages_per_conversation.toFixed(1)}</span> messages per conversation
                   </div>
                 </div>
               </div>
 
-              <div className="bg-white rounded-lg shadow p-6">
+              <div className="card p-6 group animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
                 <div className="flex items-center">
                   <div className="flex-shrink-0">
-                    <CurrencyDollarIcon className="h-8 w-8 text-yellow-600" />
+                    <div className="w-14 h-14 bg-gradient-to-br from-accent-orange to-accent-yellow rounded-2xl flex items-center justify-center shadow-apple group-hover:scale-110 transition-transform duration-300">
+                      <CurrencyDollarIcon className="h-7 w-7 text-white" />
+                    </div>
                   </div>
                   <div className="ml-5 w-0 flex-1">
                     <dl>
-                      <dt className="text-sm font-medium text-gray-500 truncate">
+                      <dt className="text-sm font-medium text-gray-600 truncate">
                         Usage Cost
                       </dt>
-                      <dd className="text-lg font-medium text-gray-900">
+                      <dd className="text-3xl font-display font-bold text-gray-900 mt-1">
                         {formatCurrency(analytics.usage.total_cost_cents)}
                       </dd>
                     </dl>
                   </div>
                 </div>
-                <div className="mt-4">
-                  <div className="text-sm text-gray-600">
-                    {formatNumber(analytics.usage.current_period_ai_requests)} AI requests
+                <div className="mt-5 p-3 bg-surface-secondary rounded-xl">
+                  <div className="text-sm text-gray-700 font-medium">
+                    <span className="text-accent-orange">{formatNumber(analytics.usage.current_period_ai_requests)}</span> AI requests
                   </div>
                 </div>
               </div>
             </div>
 
             {/* Channel Performance */}
-            <div className="bg-white rounded-lg shadow">
-              <div className="px-6 py-4 border-b border-gray-200">
-                <h3 className="text-lg font-medium text-gray-900">Channel Performance</h3>
+            <div className="card animate-fade-in-up" style={{ animationDelay: '0.5s' }}>
+              <div className="px-6 py-5 border-b border-gray-200">
+                <h3 className="text-xl font-display font-semibold text-gray-900">Channel Performance</h3>
+                <p className="text-gray-600 mt-1">Message distribution across channels</p>
               </div>
               <div className="p-6">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  {Object.entries(analytics.messages.messages_by_channel).map(([channel, count]) => (
-                    <div key={channel} className="text-center">
-                      <div className="text-2xl font-bold text-gray-900 mb-1">
+                  {Object.entries(analytics.messages.messages_by_channel).map(([channel, count], index) => (
+                    <div key={channel} className="text-center p-4 rounded-2xl bg-surface-secondary border border-gray-200 hover:shadow-apple transition-all duration-300 group">
+                      <div className="text-3xl font-display font-bold text-gray-900 mb-2 group-hover:scale-110 transition-transform duration-300">
                         {formatNumber(count)}
                       </div>
-                      <div className="text-sm text-gray-500 capitalize">
+                      <div className="text-sm font-medium text-gray-700 capitalize mb-3">
                         {channel} Messages
                       </div>
-                      <div className="mt-2">
-                        <div className="bg-gray-200 rounded-full h-2">
+                      <div className="relative">
+                        <div className="bg-gray-200 rounded-full h-3">
                           <div 
-                            className="bg-primary-600 h-2 rounded-full"
+                            className="bg-gradient-to-r from-brand-500 to-brand-600 h-3 rounded-full transition-all duration-1000 ease-out"
                             style={{ 
-                              width: `${(count / analytics.messages.total_messages) * 100}%` 
+                              width: `${(count / analytics.messages.total_messages) * 100}%`,
+                              animationDelay: `${index * 0.2}s`
                             }}
                           ></div>
+                        </div>
+                        <div className="text-xs text-gray-500 mt-2">
+                          {((count / analytics.messages.total_messages) * 100).toFixed(1)}%
                         </div>
                       </div>
                     </div>

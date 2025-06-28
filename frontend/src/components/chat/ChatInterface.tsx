@@ -109,29 +109,61 @@ const ChatInterface: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col h-screen bg-gray-50">
+    <div className="flex flex-col h-screen bg-surface-secondary">
       {/* Header */}
-      <div className="bg-white shadow-sm border-b px-6 py-4">
-        <h1 className="text-xl font-semibold text-gray-900">
-          ComChat - {tenantSlug}
-        </h1>
-        <p className="text-sm text-gray-500">
-          AI-powered customer support
-        </p>
+      <div className="bg-surface-elevated backdrop-blur-xl border-b border-gray-200/50 px-6 py-5 animate-slide-down">
+        <div className="flex items-center justify-between max-w-4xl mx-auto">
+          <div className="flex items-center space-x-4">
+            <div className="w-12 h-12 bg-gradient-to-br from-brand-500 to-brand-600 rounded-2xl flex items-center justify-center shadow-apple">
+              <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-4l-4 4z" />
+              </svg>
+            </div>
+            <div>
+              <h1 className="text-xl font-display font-bold text-gray-900">
+                ComChat
+              </h1>
+              <p className="text-sm text-gray-600 font-medium">
+                AI-powered support for {tenantSlug}
+              </p>
+            </div>
+          </div>
+          <div className="flex items-center space-x-3">
+            <div className="flex items-center space-x-2 px-3 py-2 bg-surface-primary rounded-xl shadow-apple">
+              <div className="w-2 h-2 bg-accent-green rounded-full animate-pulse-subtle"></div>
+              <span className="text-sm font-medium text-gray-700">Online</span>
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* Messages */}
-      <div className="flex-1 overflow-y-auto px-4 py-6">
-        <div className="max-w-4xl mx-auto space-y-4">
+      <div className="flex-1 overflow-y-auto px-4 py-8">
+        <div className="max-w-4xl mx-auto">
           {messages.length === 0 && (
-            <div className="text-center py-12">
-              <div className="text-gray-500 mb-2">👋</div>
-              <h3 className="text-lg font-medium text-gray-900 mb-2">
-                Welcome to ComChat!
+            <div className="text-center py-20 animate-fade-in-up">
+              <div className="w-20 h-20 bg-gradient-to-br from-brand-500 to-brand-600 rounded-3xl mx-auto flex items-center justify-center mb-8 shadow-apple-lg">
+                <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 0 012 2v8a2 2 0 01-2 2h-4l-4 4z" />
+                </svg>
+              </div>
+              <h3 className="text-2xl font-display font-bold text-gradient mb-4">
+                Welcome to ComChat
               </h3>
-              <p className="text-gray-600">
-                Send a message to get started. You can also share images for analysis.
+              <p className="text-lg text-gray-600 max-w-lg mx-auto leading-relaxed">
+                Start a conversation to get help from our AI assistant. You can ask questions, upload images, or get support for your needs.
               </p>
+              <div className="mt-8 flex justify-center space-x-4">
+                <div className="px-4 py-2 bg-surface-primary rounded-xl shadow-apple text-sm text-gray-600 border border-gray-200">
+                  💬 Ask questions
+                </div>
+                <div className="px-4 py-2 bg-surface-primary rounded-xl shadow-apple text-sm text-gray-600 border border-gray-200">
+                  📷 Upload images
+                </div>
+                <div className="px-4 py-2 bg-surface-primary rounded-xl shadow-apple text-sm text-gray-600 border border-gray-200">
+                  🎯 Get support
+                </div>
+              </div>
             </div>
           )}
           
@@ -146,52 +178,59 @@ const ChatInterface: React.FC = () => {
       </div>
 
       {/* Input Area */}
-      <div className="bg-white border-t px-4 py-4">
+      <div className="bg-surface-elevated backdrop-blur-xl border-t border-gray-200/50 px-4 py-6 animate-slide-up">
         <div className="max-w-4xl mx-auto">
           {selectedFile && (
-            <div className="mb-3 p-3 bg-blue-50 rounded-lg border border-blue-200">
+            <div className="mb-4 p-4 bg-brand-50 rounded-2xl border border-brand-200 animate-scale-in">
               <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-2">
-                  <PhotoIcon className="h-5 w-5 text-blue-600" />
-                  <span className="text-sm text-blue-800">{selectedFile.name}</span>
+                <div className="flex items-center space-x-3">
+                  <div className="w-10 h-10 bg-brand-500 rounded-xl flex items-center justify-center">
+                    <PhotoIcon className="h-5 w-5 text-white" />
+                  </div>
+                  <div>
+                    <span className="text-sm font-medium text-brand-800">{selectedFile.name}</span>
+                    <p className="text-xs text-brand-600">Image ready to send</p>
+                  </div>
                 </div>
                 <button
                   onClick={() => setSelectedFile(null)}
-                  className="text-blue-600 hover:text-blue-800"
+                  className="w-8 h-8 flex items-center justify-center text-brand-600 hover:text-brand-800 hover:bg-brand-100 rounded-lg transition-all duration-200"
                 >
-                  ×
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
                 </button>
               </div>
             </div>
           )}
           
-          <div className="flex items-end space-x-3">
+          <div className="flex items-end space-x-4">
             <div className="flex-1 relative">
               <textarea
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
-                onKeyPress={handleKeyPress}
+                onKeyDown={handleKeyPress}
                 placeholder="Type your message..."
                 rows={1}
-                className="w-full resize-none border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                className="input-field text-base resize-none min-h-[3.5rem] max-h-32 py-4"
                 disabled={isLoading}
               />
             </div>
             
             <button
               onClick={() => fileInputRef.current?.click()}
-              className="p-3 text-gray-400 hover:text-gray-600 transition-colors"
+              className="w-12 h-12 flex items-center justify-center text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-xl transition-all duration-200 active:scale-95"
               disabled={isLoading}
             >
-              <PhotoIcon className="h-5 w-5" />
+              <PhotoIcon className="h-6 w-6" />
             </button>
             
             <button
               onClick={handleSendMessage}
               disabled={isLoading || (!inputValue.trim() && !selectedFile)}
-              className="bg-primary-600 text-white p-3 rounded-lg hover:bg-primary-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              className="w-12 h-12 bg-gradient-to-r from-brand-500 to-brand-600 text-white rounded-xl hover:shadow-apple-lg disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 active:scale-95 flex items-center justify-center"
             >
-              <PaperAirplaneIcon className="h-5 w-5" />
+              <PaperAirplaneIcon className="h-6 w-6" />
             </button>
           </div>
           
