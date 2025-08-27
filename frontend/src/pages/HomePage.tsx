@@ -3,25 +3,32 @@ import { Link } from 'react-router-dom';
 
 const HomePage: React.FC = () => {
   return (
-    <div className="min-h-screen hero-gradient">
+    <div className="min-h-screen bg-white overflow-x-hidden">
       {/* Navigation */}
-      <nav className="relative z-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-6">
-            <div className="flex items-center">
-              <h1 className="text-2xl font-display font-bold brand-gradient">
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-xl border-b border-gray-100">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="flex justify-between items-center h-16">
+            <div className="flex items-center space-x-3">
+              <div className="w-7 h-7 rounded-xl bg-black flex items-center justify-center">
+                <svg className="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                </svg>
+              </div>
+              <h1 className="text-lg font-medium text-black">
                 ComChat
               </h1>
             </div>
-            <div className="hidden sm:flex items-center space-x-8">
-              <Link to="/chat" className="text-gray-600 hover:text-gray-900 font-medium transition-colors">
-                Live Demo
-              </Link>
-              <Link to="/admin" className="text-gray-600 hover:text-gray-900 font-medium transition-colors">
-                Analytics
-              </Link>
-              <button className="btn-primary">
-                Get Quote
+            
+            <div className="hidden md:flex items-center space-x-8">
+              <a href="#how" className="text-gray-600 hover:text-black font-normal">How it works</a>
+              <a href="#examples" className="text-gray-600 hover:text-black font-normal">Examples</a>
+              <a href="#pricing" className="text-gray-600 hover:text-black font-normal">Pricing</a>
+              <Link to="/chat" className="text-gray-600 hover:text-black font-normal">Try it</Link>
+            </div>
+
+            <div className="flex items-center space-x-4">
+              <button className="bg-black text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-800 transition-colors">
+                Start free
               </button>
             </div>
           </div>
@@ -29,332 +36,378 @@ const HomePage: React.FC = () => {
       </nav>
 
       {/* Hero Section */}
-      <div className="relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
-          <div className="text-center">
-            <div className="animate-fade-in-up">
-              <h1 className="text-6xl md:text-7xl lg:text-8xl font-display font-bold text-gradient mb-8 tracking-tight">
-                ComChat Demo
-              </h1>
-              <p className="text-2xl md:text-3xl font-display font-medium text-gray-700 mb-8 max-w-4xl mx-auto leading-tight">
-                Custom AI Chatbots for Any Industry
-              </p>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed mb-12">
-                Experience our intelligent chatbot platform in action. We build custom AI assistants 
-                tailored to your business needs - from healthcare to e-commerce, finance to education. 
-                Try our demo and see how AI can transform your customer interactions.
-              </p>
-            </div>
-
-            <div className="animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center max-w-md mx-auto">
-                <Link
-                  to="/chat"
-                  className="btn-primary w-full sm:w-auto flex justify-center items-center space-x-2"
-                >
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-                  </svg>
-                  <span>Try Live Demo</span>
-                </Link>
+      <section className="min-h-screen pt-16 bg-white flex items-center">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 w-full">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center min-h-[85vh]">
+            {/* Left - Copy */}
+            <div className="space-y-6 lg:space-y-8 order-2 lg:order-1">
+              <div className="space-y-4 lg:space-y-6">
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-medium text-black leading-tight">
+                  Chatbots that actually
+                  <br />
+                  <span className="italic">sound human</span>
+                </h1>
                 
-                <Link
-                  to="/admin"
-                  className="btn-secondary w-full sm:w-auto flex justify-center items-center space-x-2"
-                >
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                  </svg>
-                  <span>View Analytics</span>
+                <p className="text-lg sm:text-xl lg:text-2xl text-gray-600 leading-relaxed max-w-lg">
+                  Your customers can't tell the difference. 
+                  That's the point.
+                </p>
+              </div>
+              
+              <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-4 sm:space-y-0 sm:space-x-4">
+                <Link to="/chat" className="bg-black text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-medium hover:bg-gray-800 transition-colors w-full sm:w-auto text-center">
+                  See it in action
                 </Link>
+                <span className="text-gray-400 text-sm">No signup required</span>
               </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Floating Elements */}
-        <div className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-br from-brand-400/10 to-accent-blue/10 rounded-full blur-xl animate-pulse-subtle"></div>
-        <div className="absolute top-40 right-20 w-24 h-24 bg-gradient-to-br from-accent-purple/10 to-accent-pink/10 rounded-full blur-xl animate-pulse-subtle" style={{ animationDelay: '1s' }}></div>
-        <div className="absolute bottom-20 left-1/4 w-20 h-20 bg-gradient-to-br from-accent-green/10 to-accent-mint/10 rounded-full blur-xl animate-pulse-subtle" style={{ animationDelay: '2s' }}></div>
-      </div>
-
-      {/* Features Section */}
-      <div className="py-24 bg-surface-primary/50 backdrop-blur-xl">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-20">
-            <h2 className="text-4xl font-display font-bold text-gradient mb-6">
-              Custom AI Chatbots for Every Industry
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              We build intelligent conversational AI solutions tailored to your specific business needs and industry requirements
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="feature-card group animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
-              <div className="icon-wrapper bg-gradient-to-br from-brand-500 to-brand-600 mx-auto mb-6">
-                <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
-                </svg>
-              </div>
-              <h3 className="text-2xl font-display font-semibold text-gray-900 mb-4">Industry-Specific Training</h3>
-              <p className="text-gray-600 leading-relaxed">
-                Custom-trained AI models with deep knowledge of your industry, from healthcare compliance to financial regulations and e-commerce best practices.
-              </p>
             </div>
             
-            <div className="feature-card group animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
-              <div className="icon-wrapper bg-gradient-to-br from-accent-green to-accent-mint mx-auto mb-6">
-                <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4" />
-                </svg>
-              </div>
-              <h3 className="text-2xl font-display font-semibold text-gray-900 mb-4">Flexible Integration</h3>
-              <p className="text-gray-600 leading-relaxed">
-                Deploy across websites, mobile apps, WhatsApp, Telegram, and more. API-first design ensures seamless integration with your existing systems.
-              </p>
-            </div>
-            
-            <div className="feature-card group animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
-              <div className="icon-wrapper bg-gradient-to-br from-accent-purple to-accent-pink mx-auto mb-6">
-                <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                </svg>
-              </div>
-              <h3 className="text-2xl font-display font-semibold text-gray-900 mb-4">Enterprise Security</h3>
-              <p className="text-gray-600 leading-relaxed">
-                Bank-level security, GDPR compliance, and data privacy protection. Your customer data stays secure with end-to-end encryption.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Pricing Section */}
-      <div className="py-24 bg-surface-secondary">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-20">
-            <h2 className="text-4xl font-display font-bold text-gradient mb-6">
-              Choose Your Perfect Plan
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Transparent pricing for custom AI chatbot solutions. From startups to enterprise, we have a plan that scales with your business.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {/* Starter Plan */}
-            <div className="card p-8 relative animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
-              <div className="text-center">
-                <h3 className="text-2xl font-display font-bold text-gray-900 mb-2">Starter</h3>
-                <p className="text-gray-600 mb-6">Perfect for small businesses</p>
-                <div className="mb-8">
-                  <span className="text-5xl font-display font-bold text-gradient">$29</span>
-                  <span className="text-gray-600 ml-2">/month</span>
+            {/* Right - Live Chat Demo */}
+            <div className="relative order-1 lg:order-2">
+              <div className="bg-white border border-gray-200 rounded-2xl shadow-lg overflow-hidden mx-auto max-w-md lg:max-w-none">
+                {/* Chat Header */}
+                <div className="bg-gray-50 px-4 sm:px-6 py-3 sm:py-4 border-b border-gray-100">
+                  <div className="flex items-center space-x-3">
+                    <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                    <span className="text-sm font-medium text-gray-900">Support Chat</span>
+                  </div>
                 </div>
                 
-                <ul className="space-y-4 mb-8 text-left">
+                {/* Chat Messages - No scroll, shows full conversation */}
+                <div className="p-4 sm:p-6 space-y-4 h-[500px] sm:h-[600px] lg:h-[650px] xl:h-[700px]">
+                  <div className="flex items-start space-x-3">
+                    <div className="w-7 h-7 sm:w-8 sm:h-8 bg-gray-200 rounded-full flex-shrink-0"></div>
+                    <div className="bg-gray-100 rounded-2xl rounded-tl-sm px-3 sm:px-4 py-2 sm:py-3 max-w-[250px] sm:max-w-xs">
+                      <p className="text-xs sm:text-sm text-gray-900">Hi! I'm looking for a refund on my order from last week.</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start space-x-3 justify-end">
+                    <div className="bg-black text-white rounded-2xl rounded-tr-sm px-3 sm:px-4 py-2 sm:py-3 max-w-[250px] sm:max-w-xs">
+                      <p className="text-xs sm:text-sm">I'd be happy to help with that! Let me pull up your recent orders. What's the email address on your account?</p>
+                    </div>
+                    <div className="w-7 h-7 sm:w-8 sm:h-8 bg-black rounded-full flex-shrink-0"></div>
+                  </div>
+                  
+                  <div className="flex items-start space-x-3">
+                    <div className="w-7 h-7 sm:w-8 sm:h-8 bg-gray-200 rounded-full flex-shrink-0"></div>
+                    <div className="bg-gray-100 rounded-2xl rounded-tl-sm px-3 sm:px-4 py-2 sm:py-3 max-w-[250px] sm:max-w-xs">
+                      <p className="text-xs sm:text-sm text-gray-900">sarah.chen@email.com</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start space-x-3 justify-end">
+                    <div className="bg-black text-white rounded-2xl rounded-tr-sm px-3 sm:px-4 py-2 sm:py-3 max-w-[250px] sm:max-w-xs">
+                      <p className="text-xs sm:text-sm">Perfect! I see your order #4729 from March 15th. That looks like it was for the wireless headphones, right? I can definitely process that refund for you.</p>
+                    </div>
+                    <div className="w-7 h-7 sm:w-8 sm:h-8 bg-black rounded-full flex-shrink-0"></div>
+                  </div>
+                  
+                  <div className="flex items-start space-x-3">
+                    <div className="w-7 h-7 sm:w-8 sm:h-8 bg-gray-200 rounded-full flex-shrink-0"></div>
+                    <div className="bg-gray-100 rounded-2xl rounded-tl-sm px-3 sm:px-4 py-2 sm:py-3 max-w-[250px] sm:max-w-xs">
+                      <p className="text-xs sm:text-sm text-gray-900">Wow, that was fast! Yes, exactly. Thank you!</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start space-x-3 justify-end">
+                    <div className="bg-black text-white rounded-2xl rounded-tr-sm px-3 sm:px-4 py-2 sm:py-3 max-w-[250px] sm:max-w-xs">
+                      <p className="text-xs sm:text-sm">You're welcome! I've processed your refund and you should see it back on your card within 3-5 business days. Is there anything else I can help you with today?</p>
+                    </div>
+                    <div className="w-7 h-7 sm:w-8 sm:h-8 bg-black rounded-full flex-shrink-0"></div>
+                  </div>
+                  
+                  <div className="flex items-start space-x-3">
+                    <div className="w-7 h-7 sm:w-8 sm:h-8 bg-gray-200 rounded-full flex-shrink-0"></div>
+                    <div className="bg-gray-100 rounded-2xl rounded-tl-sm px-3 sm:px-4 py-2 sm:py-3 max-w-[250px] sm:max-w-xs">
+                      <p className="text-xs sm:text-sm text-gray-900">That's perfect, thank you so much for your help!</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center space-x-2 text-gray-400 mt-6">
+                    <div className="flex space-x-1">
+                      <div className="w-2 h-2 bg-gray-300 rounded-full animate-bounce"></div>
+                      <div className="w-2 h-2 bg-gray-300 rounded-full animate-bounce" style={{animationDelay: '0.1s'}}></div>
+                      <div className="w-2 h-2 bg-gray-300 rounded-full animate-bounce" style={{animationDelay: '0.2s'}}></div>
+                    </div>
+                    <span className="text-xs">Bot is typing...</span>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Floating indicator */}
+              <div className="absolute -bottom-3 -right-3 sm:-bottom-4 sm:-right-4 bg-white border border-gray-200 rounded-full px-2 py-1 sm:px-3 sm:py-2 shadow-lg">
+                <span className="text-xs font-medium text-gray-600">100% AI</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      {/* How it Works */}
+      <section id="how" className="py-16 sm:py-20 lg:py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="text-center mb-12 sm:mb-16">
+            <h2 className="text-2xl sm:text-3xl font-medium text-black mb-4">
+              How we make it sound human
+            </h2>
+            <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">
+              It's not just advanced AI. It's conversation design.
+            </p>
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 lg:gap-12">
+            <div className="text-center space-y-4">
+              <div className="w-14 h-14 sm:w-16 sm:h-16 bg-gray-100 rounded-xl flex items-center justify-center mx-auto">
+                <svg className="w-7 h-7 sm:w-8 sm:h-8 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                </svg>
+              </div>
+              <h3 className="text-base sm:text-lg font-medium text-black">Conversation Training</h3>
+              <p className="text-gray-600 text-sm leading-relaxed max-w-xs mx-auto">
+                We train our models on thousands of real customer service conversations, not generic chatbot responses.
+              </p>
+            </div>
+            
+            <div className="text-center space-y-4">
+              <div className="w-14 h-14 sm:w-16 sm:h-16 bg-gray-100 rounded-xl flex items-center justify-center mx-auto">
+                <svg className="w-7 h-7 sm:w-8 sm:h-8 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                </svg>
+              </div>
+              <h3 className="text-base sm:text-lg font-medium text-black">Empathy Engine</h3>
+              <p className="text-gray-600 text-sm leading-relaxed max-w-xs mx-auto">
+                Our AI detects emotional context and responds with appropriate empathy, not just information.
+              </p>
+            </div>
+            
+            <div className="text-center space-y-4 sm:col-span-2 lg:col-span-1">
+              <div className="w-14 h-14 sm:w-16 sm:h-16 bg-gray-100 rounded-xl flex items-center justify-center mx-auto">
+                <svg className="w-7 h-7 sm:w-8 sm:h-8 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                </svg>
+              </div>
+              <h3 className="text-base sm:text-lg font-medium text-black">Natural Language</h3>
+              <p className="text-gray-600 text-sm leading-relaxed max-w-xs mx-auto">
+                We eliminate robotic phrases and corporate jargon. Every response sounds like something a real person would say.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Pricing Section */}
+      <section id="pricing" className="py-16 sm:py-20 lg:py-24 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="text-center mb-12 sm:mb-16">
+            <h2 className="text-2xl sm:text-3xl font-medium text-black mb-4">
+              Simple pricing
+            </h2>
+            <p className="text-base sm:text-lg text-gray-600">
+              Choose the perfect plan for your business. Scale up or down anytime.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 max-w-6xl mx-auto">
+            {/* Starter Plan */}
+            <div className="bg-white border border-gray-200 p-8 rounded-xl hover:-translate-y-1 transition-all duration-300">
+              <div className="text-center">
+                <h3 className="text-xl font-medium text-black mb-2">Starter</h3>
+                <p className="text-gray-600 mb-6">Perfect for small businesses</p>
+                <div className="mb-8">
+                  <span className="text-4xl font-medium text-black">$49</span>
+                  <span className="text-gray-500 ml-2">/month</span>
+                </div>
+                
+                <ul className="space-y-3 mb-8 text-left">
                   <li className="flex items-center">
-                    <svg className="w-5 h-5 text-accent-green mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    <svg className="w-4 h-4 text-green-500 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
-                    <span className="text-gray-700">Up to 5,000 messages/month</span>
+                    <span className="text-gray-700 text-sm">1,000 conversations/month</span>
                   </li>
                   <li className="flex items-center">
-                    <svg className="w-5 h-5 text-accent-green mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    <svg className="w-4 h-4 text-green-500 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
-                    <span className="text-gray-700">500 active conversations</span>
+                    <span className="text-gray-700 text-sm">Website integration</span>
                   </li>
                   <li className="flex items-center">
-                    <svg className="w-5 h-5 text-accent-green mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    <svg className="w-4 h-4 text-green-500 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
-                    <span className="text-gray-700">Text-only conversations</span>
+                    <span className="text-gray-700 text-sm">Basic analytics</span>
                   </li>
                   <li className="flex items-center">
-                    <svg className="w-5 h-5 text-accent-green mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    <svg className="w-4 h-4 text-green-500 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
-                    <span className="text-gray-700">Basic analytics dashboard</span>
-                  </li>
-                  <li className="flex items-center">
-                    <svg className="w-5 h-5 text-accent-green mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                    <span className="text-gray-700">Web chat integration</span>
-                  </li>
-                  <li className="flex items-center">
-                    <svg className="w-5 h-5 text-accent-green mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                    <span className="text-gray-700">Email support</span>
+                    <span className="text-gray-700 text-sm">Email support</span>
                   </li>
                 </ul>
                 
-                <button className="btn-secondary w-full">
-                  Get Started
+                <button className="w-full border border-gray-300 text-gray-700 px-6 py-3 rounded-lg font-medium hover:bg-gray-50 transition-colors">
+                  Start Free Trial
                 </button>
               </div>
             </div>
 
             {/* Professional Plan - Featured */}
-            <div className="card p-8 relative border-2 border-brand-500 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
-              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                <span className="bg-gradient-to-r from-brand-500 to-brand-600 text-white px-6 py-2 rounded-full text-sm font-medium shadow-apple">
+            <div className="bg-white border-2 border-black p-8 rounded-xl relative hover:-translate-y-1 transition-all duration-300">
+              <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
+                <span className="bg-black text-white px-3 py-1 rounded-full text-sm font-medium">
                   Most Popular
                 </span>
               </div>
               
               <div className="text-center">
-                <h3 className="text-2xl font-display font-bold text-gray-900 mb-2">Professional</h3>
+                <h3 className="text-xl font-medium text-black mb-2">Professional</h3>
                 <p className="text-gray-600 mb-6">Ideal for growing companies</p>
                 <div className="mb-8">
-                  <span className="text-5xl font-display font-bold text-gradient">$79</span>
-                  <span className="text-gray-600 ml-2">/month</span>
+                  <span className="text-4xl font-medium text-black">$149</span>
+                  <span className="text-gray-500 ml-2">/month</span>
                 </div>
                 
-                <ul className="space-y-4 mb-8 text-left">
+                <ul className="space-y-3 mb-8 text-left">
                   <li className="flex items-center">
-                    <svg className="w-5 h-5 text-accent-green mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    <svg className="w-4 h-4 text-green-500 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
-                    <span className="text-gray-700">Up to 25,000 messages/month</span>
+                    <span className="text-gray-700 text-sm">5,000 conversations/month</span>
                   </li>
                   <li className="flex items-center">
-                    <svg className="w-5 h-5 text-accent-green mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    <svg className="w-4 h-4 text-green-500 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
-                    <span className="text-gray-700">2,500 active conversations</span>
+                    <span className="text-gray-700 text-sm">Multi-channel support</span>
                   </li>
                   <li className="flex items-center">
-                    <svg className="w-5 h-5 text-accent-green mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    <svg className="w-4 h-4 text-green-500 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
-                    <span className="text-gray-700"><strong>Multimodal support</strong> (text + images)</span>
+                    <span className="text-gray-700 text-sm">Advanced analytics</span>
                   </li>
                   <li className="flex items-center">
-                    <svg className="w-5 h-5 text-accent-green mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    <svg className="w-4 h-4 text-green-500 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
-                    <span className="text-gray-700">Advanced analytics & insights</span>
+                    <span className="text-gray-700 text-sm">Priority support</span>
                   </li>
                   <li className="flex items-center">
-                    <svg className="w-5 h-5 text-accent-green mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    <svg className="w-4 h-4 text-green-500 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
-                    <span className="text-gray-700">Multi-channel integration</span>
-                  </li>
-                  <li className="flex items-center">
-                    <svg className="w-5 h-5 text-accent-green mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                    <span className="text-gray-700">Priority support & training</span>
+                    <span className="text-gray-700 text-sm">Custom integrations</span>
                   </li>
                 </ul>
                 
-                <button className="btn-primary w-full">
+                <button className="w-full bg-black text-white px-6 py-3 rounded-lg font-medium hover:bg-gray-800 transition-colors">
                   Start Free Trial
                 </button>
               </div>
             </div>
 
             {/* Enterprise Plan */}
-            <div className="card p-8 relative animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
+            <div className="bg-white border border-gray-200 p-8 rounded-xl hover:-translate-y-1 transition-all duration-300">
               <div className="text-center">
-                <h3 className="text-2xl font-display font-bold text-gray-900 mb-2">Enterprise</h3>
+                <h3 className="text-xl font-medium text-black mb-2">Enterprise</h3>
                 <p className="text-gray-600 mb-6">For large organizations</p>
                 <div className="mb-8">
-                  <span className="text-5xl font-display font-bold text-gradient">Custom</span>
-                  <span className="text-gray-600 ml-2">pricing</span>
+                  <span className="text-4xl font-medium text-black">Custom</span>
                 </div>
                 
-                <ul className="space-y-4 mb-8 text-left">
+                <ul className="space-y-3 mb-8 text-left">
                   <li className="flex items-center">
-                    <svg className="w-5 h-5 text-accent-green mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    <svg className="w-4 h-4 text-green-500 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
-                    <span className="text-gray-700">Unlimited messages & conversations</span>
+                    <span className="text-gray-700 text-sm">Unlimited conversations</span>
                   </li>
                   <li className="flex items-center">
-                    <svg className="w-5 h-5 text-accent-green mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    <svg className="w-4 h-4 text-green-500 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
-                    <span className="text-gray-700"><strong>Full multimodal AI</strong> (text, images, voice)</span>
+                    <span className="text-gray-700 text-sm">White-label solution</span>
                   </li>
                   <li className="flex items-center">
-                    <svg className="w-5 h-5 text-accent-green mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    <svg className="w-4 h-4 text-green-500 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
-                    <span className="text-gray-700">Custom AI model training</span>
+                    <span className="text-gray-700 text-sm">Custom model training</span>
                   </li>
                   <li className="flex items-center">
-                    <svg className="w-5 h-5 text-accent-green mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    <svg className="w-4 h-4 text-green-500 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
-                    <span className="text-gray-700">White-label solution</span>
+                    <span className="text-gray-700 text-sm">Dedicated account manager</span>
                   </li>
                   <li className="flex items-center">
-                    <svg className="w-5 h-5 text-accent-green mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    <svg className="w-4 h-4 text-green-500 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
-                    <span className="text-gray-700">Dedicated account manager</span>
-                  </li>
-                  <li className="flex items-center">
-                    <svg className="w-5 h-5 text-accent-green mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                    <span className="text-gray-700">24/7 premium support</span>
+                    <span className="text-gray-700 text-sm">24/7 premium support</span>
                   </li>
                 </ul>
                 
-                <button className="btn-secondary w-full">
+                <button className="w-full border border-gray-300 text-gray-700 px-6 py-3 rounded-lg font-medium hover:bg-gray-50 transition-colors">
                   Contact Sales
                 </button>
               </div>
             </div>
           </div>
-
-          {/* Additional Info */}
-          <div className="mt-16 text-center">
-            <p className="text-gray-600 mb-4">
-              All plans include: Custom branding, API access, webhook integrations, and 99.9% uptime SLA
-            </p>
-            <p className="text-sm text-gray-500">
-              Need a custom solution? <button className="text-brand-600 hover:text-brand-700 font-medium underline">Contact us</button> for volume discounts and industry-specific packages.
-            </p>
-          </div>
         </div>
-      </div>
+      </section>
 
       {/* CTA Section */}
-      <div className="py-20 bg-gradient-to-br from-brand-50 to-brand-100">
-        <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-display font-bold text-gradient mb-6">
-            See ComChat in Action
+      <section className="py-16 sm:py-20 lg:py-24 bg-white">
+        <div className="max-w-4xl mx-auto text-center px-4 sm:px-6">
+          <h2 className="text-2xl sm:text-3xl font-medium text-black mb-4">
+            Try it yourself
           </h2>
-          <p className="text-xl text-gray-600 mb-10 max-w-2xl mx-auto">
-            Try our interactive demo and discover how custom AI chatbots can revolutionize your customer interactions across any industry.
+          <p className="text-base sm:text-lg text-gray-600 mb-8">
+            See how natural our conversations feel. No setup required.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Link
               to="/chat"
-              className="btn-primary inline-flex items-center space-x-2 text-lg px-8 py-4"
+              className="bg-black text-white px-6 py-3 rounded-lg font-medium hover:bg-gray-800 transition-colors w-full sm:w-auto"
             >
-              <span>Experience Live Demo</span>
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1m4 0h1m-6 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
+              Start chatting
             </Link>
-            <button className="btn-secondary inline-flex items-center space-x-2 text-lg px-8 py-4">
-              <span>Schedule Consultation</span>
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-              </svg>
+            <span className="text-gray-400 hidden sm:block">or</span>
+            <button className="text-gray-600 hover:text-black font-medium">
+              Watch a demo
             </button>
           </div>
         </div>
-      </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-gray-50 border-t border-gray-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+          <div className="flex flex-col md:flex-row justify-between items-center">
+            <div className="flex items-center space-x-3 mb-4 md:mb-0">
+              <div className="w-6 h-6 rounded-lg bg-black flex items-center justify-center">
+                <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                </svg>
+              </div>
+              <span className="font-medium text-black">ComChat</span>
+            </div>
+            
+            <div className="flex items-center flex-wrap justify-center md:justify-end space-x-6 sm:space-x-8 text-sm">
+              <a href="mailto:hello@comchat.com" className="text-gray-600 hover:text-black">Contact</a>
+              <a href="#" className="text-gray-600 hover:text-black">Privacy</a>
+              <a href="#" className="text-gray-600 hover:text-black">Terms</a>
+            </div>
+          </div>
+          
+          <div className="mt-6 sm:mt-8 pt-6 sm:pt-8 border-t border-gray-100 text-center">
+            <p className="text-gray-500 text-xs sm:text-sm">© 2024 ComChat. Made with care for human conversations.</p>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };

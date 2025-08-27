@@ -103,35 +103,35 @@ const ChatInterface: React.FC = () => {
       if (file.type.startsWith('image/')) {
         setSelectedFile(file);
       } else {
-        toast.error('Only image files are supported');
+        toast.error('Only images are supported');
       }
     }
   };
 
   return (
-    <div className="flex flex-col h-screen bg-surface-secondary">
+    <div className="flex flex-col h-screen bg-white">
       {/* Header */}
-      <div className="bg-surface-elevated backdrop-blur-xl border-b border-gray-200/50 px-6 py-5 animate-slide-down">
+      <div className="bg-white/80 backdrop-blur-xl border-b border-gray-100 px-4 sm:px-6 py-4 sm:py-5">
         <div className="flex items-center justify-between max-w-4xl mx-auto">
           <div className="flex items-center space-x-4">
-            <div className="w-12 h-12 bg-gradient-to-br from-brand-500 to-brand-600 rounded-2xl flex items-center justify-center shadow-apple">
+            <div className="w-10 h-10 sm:w-12 sm:h-12 bg-black rounded-xl flex items-center justify-center">
               <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-4l-4 4z" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
               </svg>
             </div>
             <div>
-              <h1 className="text-xl font-display font-bold text-gray-900">
+              <h1 className="text-lg sm:text-xl font-medium text-black">
                 ComChat
               </h1>
-              <p className="text-sm text-gray-600 font-medium">
-                AI-powered support for {tenantSlug}
+              <p className="text-sm text-gray-600 hidden sm:block">
+                Support Chat
               </p>
             </div>
           </div>
           <div className="flex items-center space-x-3">
-            <div className="flex items-center space-x-2 px-3 py-2 bg-surface-primary rounded-xl shadow-apple">
-              <div className="w-2 h-2 bg-accent-green rounded-full animate-pulse-subtle"></div>
-              <span className="text-sm font-medium text-gray-700">Online</span>
+            <div className="flex items-center space-x-2 px-3 py-1.5 sm:py-2 bg-gray-50 rounded-lg border border-gray-200">
+              <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+              <span className="text-sm font-medium text-gray-700">Available</span>
             </div>
           </div>
         </div>
@@ -142,28 +142,17 @@ const ChatInterface: React.FC = () => {
         <div className="max-w-4xl mx-auto">
           {messages.length === 0 && (
             <div className="text-center py-20 animate-fade-in-up">
-              <div className="w-20 h-20 bg-gradient-to-br from-brand-500 to-brand-600 rounded-3xl mx-auto flex items-center justify-center mb-8 shadow-apple-lg">
+              <div className="w-16 h-16 sm:w-20 sm:h-20 bg-black rounded-2xl mx-auto flex items-center justify-center mb-6 sm:mb-8">
                 <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 0 012 2v8a2 2 0 01-2 2h-4l-4 4z" />
                 </svg>
               </div>
-              <h3 className="text-2xl font-display font-bold text-gradient mb-4">
-                Welcome to ComChat
+              <h3 className="text-xl sm:text-2xl font-medium text-black mb-4">
+                How can I help?
               </h3>
-              <p className="text-lg text-gray-600 max-w-lg mx-auto leading-relaxed">
-                Start a conversation to get help from our AI assistant. You can ask questions, upload images, or get support for your needs.
+              <p className="text-base sm:text-lg text-gray-600 max-w-lg mx-auto leading-relaxed px-4">
+                Just ask me anything. I'm here to help.
               </p>
-              <div className="mt-8 flex justify-center space-x-4">
-                <div className="px-4 py-2 bg-surface-primary rounded-xl shadow-apple text-sm text-gray-600 border border-gray-200">
-                  💬 Ask questions
-                </div>
-                <div className="px-4 py-2 bg-surface-primary rounded-xl shadow-apple text-sm text-gray-600 border border-gray-200">
-                  📷 Upload images
-                </div>
-                <div className="px-4 py-2 bg-surface-primary rounded-xl shadow-apple text-sm text-gray-600 border border-gray-200">
-                  🎯 Get support
-                </div>
-              </div>
             </div>
           )}
           
@@ -189,7 +178,7 @@ const ChatInterface: React.FC = () => {
                   </div>
                   <div>
                     <span className="text-sm font-medium text-brand-800">{selectedFile.name}</span>
-                    <p className="text-xs text-brand-600">Image ready to send</p>
+                    <p className="text-xs text-gray-600">Ready to send</p>
                   </div>
                 </div>
                 <button
@@ -210,7 +199,7 @@ const ChatInterface: React.FC = () => {
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
                 onKeyDown={handleKeyPress}
-                placeholder="Type your message..."
+                placeholder="Ask me anything..."
                 rows={1}
                 className="input-field text-base resize-none min-h-[3.5rem] max-h-32 py-4"
                 disabled={isLoading}

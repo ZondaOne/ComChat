@@ -6,19 +6,19 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // Apple-inspired brand palette with sophisticated gradients
+        // ComChat brand palette - refined blue to orange
         brand: {
-          50: '#f0f9ff',
-          100: '#e0f2fe', 
-          200: '#bae6fd',
-          300: '#7dd3fc',
-          400: '#38bdf8',
-          500: '#0ea5e9',
-          600: '#0284c7',
-          700: '#0369a1',
-          800: '#075985',
-          900: '#0c4a6e',
-          950: '#082f49',
+          50: '#fff7ed',
+          100: '#ffedd5',
+          200: '#fed7aa',
+          300: '#fdba74',
+          400: '#fb923c',
+          500: '#f97316',
+          600: '#ea580c',
+          700: '#c2410c',
+          800: '#9a3412',
+          900: '#7c2d12',
+          950: '#431407',
         },
         // Refined Apple-style grays with perfect contrast
         gray: {
@@ -34,6 +34,21 @@ module.exports = {
           800: '#1f2937',
           900: '#111827',
           950: '#030712',
+        },
+        // New dark gray-black clean palette
+        dark: {
+          25: '#fefefe',
+          50: '#fafafa',
+          100: '#f0f0f0',
+          200: '#e4e4e4',
+          300: '#d1d1d1',
+          400: '#a3a3a3',
+          500: '#737373',
+          600: '#525252',
+          700: '#404040',
+          800: '#262626',
+          900: '#171717',
+          950: '#0a0a0a',
         },
         // Modern Apple-style accent colors
         accent: {
@@ -187,8 +202,13 @@ module.exports = {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
         'gradient-apple': 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-        'gradient-brand': 'linear-gradient(135deg, #0ea5e9 0%, #3b82f6 100%)',
+        'gradient-brand': 'linear-gradient(135deg, #0284c7 0%, #f97316 100%)',
         'gradient-surface': 'linear-gradient(145deg, #ffffff 0%, #f8fafc 100%)',
+        'gradient-hero': 'linear-gradient(135deg, #f0f9ff 0%, #fff7ed 50%, #fed7aa 100%)',
+        'gradient-mesh': 'radial-gradient(at 40% 20%, #0284c7 0%, transparent 50%), radial-gradient(at 80% 0%, #f97316 0%, transparent 50%), radial-gradient(at 0% 50%, #fb923c 0%, transparent 50%)',
+        'gradient-glass': 'linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%)',
+        'gradient-dark-blur': 'radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.15) 0%, transparent 50%), radial-gradient(circle at 40% 40%, rgba(120, 119, 198, 0.15) 0%, transparent 50%)',
+        'gradient-dark-hero': 'linear-gradient(135deg, #0a0a0a 0%, #171717 25%, #262626 50%, #171717 75%, #0a0a0a 100%)',
       },
       blur: {
         '4xl': '72px',

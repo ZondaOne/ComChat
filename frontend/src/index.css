@@ -29,7 +29,7 @@
 
 @layer components {
   .btn-primary {
-    @apply relative px-6 py-3 bg-gradient-to-r from-brand-500 to-brand-600 text-white font-medium rounded-xl shadow-apple hover:shadow-apple-lg active:scale-[0.98] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2 focus:ring-offset-white overflow-hidden;
+    @apply relative px-6 py-3 bg-gradient-to-r from-brand-500 to-brand-600 text-white font-medium rounded-xl shadow-apple hover:shadow-apple-lg hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2 focus:ring-offset-white overflow-hidden;
   }
   
   .btn-primary::before {
@@ -42,7 +42,7 @@
   }
   
   .btn-secondary {
-    @apply px-6 py-3 bg-surface-primary text-gray-700 font-medium rounded-xl border border-gray-300 hover:bg-surface-secondary hover:border-gray-400 hover:shadow-apple active:scale-[0.98] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2 focus:ring-offset-white;
+    @apply px-6 py-3 bg-surface-primary text-gray-700 font-medium rounded-xl border border-gray-300 hover:bg-surface-secondary hover:border-gray-400 hover:shadow-apple hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2 focus:ring-offset-white;
   }
   
   .btn-ghost {
@@ -50,7 +50,7 @@
   }
   
   .card {
-    @apply bg-surface-primary border border-gray-200 rounded-2xl shadow-apple hover:shadow-apple-lg transition-all duration-300;
+    @apply bg-surface-primary border border-gray-200 rounded-2xl shadow-apple hover:shadow-apple-lg hover:scale-[1.02] transition-all duration-300;
   }
   
   .card-elevated {
@@ -74,11 +74,11 @@
   }
   
   .feature-card {
-    @apply bg-surface-primary rounded-2xl p-8 border border-gray-200 hover:border-gray-300 hover:shadow-apple-lg transition-all duration-300 hover:-translate-y-1;
+    @apply bg-surface-primary rounded-2xl p-8 border border-gray-200 hover:border-gray-300 hover:shadow-apple-lg transition-all duration-300 hover:-translate-y-2 hover:scale-[1.02];
   }
   
   .icon-wrapper {
-    @apply w-14 h-14 rounded-2xl flex items-center justify-center transition-all duration-300 group-hover:scale-110;
+    @apply w-14 h-14 rounded-2xl flex items-center justify-center transition-all duration-300 group-hover:scale-110 group-hover:rotate-3;
   }
   
   .hero-gradient {
@@ -103,6 +103,32 @@
     text-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
   }
   
+  .hover-lift {
+    @apply transition-transform duration-300 hover:-translate-y-2;
+  }
+  
+  .hover-glow {
+    @apply transition-all duration-300;
+  }
+  
+  .hover-glow:hover {
+    @apply shadow-2xl;
+    filter: drop-shadow(0 0 20px rgba(59, 130, 246, 0.3));
+  }
+  
+  .floating-animation {
+    animation: floating 3s ease-in-out infinite;
+  }
+  
+  @keyframes floating {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+  
   .glass-morphism {
     backdrop-filter: blur(16px) saturate(120%);
     -webkit-backdrop-filter: blur(16px) saturate(120%);
@@ -115,6 +141,43 @@
     -webkit-backdrop-filter: blur(16px) saturate(120%);
     background-color: rgba(0, 0, 0, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .glass-navbar {
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    background-color: rgba(10, 10, 10, 0.8);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .glass-button {
+    backdrop-filter: blur(16px) saturate(120%);
+    -webkit-backdrop-filter: blur(16px) saturate(120%);
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .glass-button:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-1px);
+  }
+
+  .glass-card {
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    background-color: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  }
+
+  .apple-shadow {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15), 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+
+  .apple-shadow-lg {
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2), 0 4px 12px rgba(0, 0, 0, 0.15);
   }
   
   .perspective-1000 {
