@@ -6,6 +6,7 @@ import toast from 'react-hot-toast';
 import { chatService } from '../../services/chatService';
 import MessageBubble from './MessageBubble';
 import TypingIndicator from './TypingIndicator';
+import BetaSignupPopup from '../BetaSignupPopup';
 
 interface Message {
   id: string;
@@ -23,6 +24,9 @@ const ChatInterface: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [conversationId, setConversationId] = useState<string | null>(null);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [showBetaPopup, setShowBetaPopup] = useState(true);
+  const [hasBetaAccess, setHasBetaAccess] = useState(false);
+  const [hasSignedUp, setHasSignedUp] = useState(false);
   
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -35,7 +39,13 @@ const ChatInterface: React.FC = () => {
     scrollToBottom();
   }, [messages]);
 
+  const handleBetaSignupSuccess = () => {
+    setShowBetaPopup(false);
+    setHasSignedUp(true);
+  };
+
   const handleSendMessage = async () => {
+    if (!hasBetaAccess) return;
     if (!inputValue.trim() && !selectedFile) return;
     
     const userMessage: Message = {
@@ -143,16 +153,35 @@ const ChatInterface: React.FC = () => {
           {messages.length === 0 && (
             <div className="text-center py-20 animate-fade-in-up">
               <div className="w-16 h-16 sm:w-20 sm:h-20 bg-black rounded-2xl mx-auto flex items-center justify-center mb-6 sm:mb-8">
-                <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 0 012 2v8a2 2 0 01-2 2h-4l-4 4z" />
-                </svg>
+                {hasSignedUp ? (
+                  <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                ) : (
+                  <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 0 012 2v8a2 2 0 01-2 2h-4l-4 4z" />
+                  </svg>
+                )}
               </div>
-              <h3 className="text-xl sm:text-2xl font-medium text-black mb-4">
-                How can I help?
-              </h3>
-              <p className="text-base sm:text-lg text-gray-600 max-w-lg mx-auto leading-relaxed px-4">
-                Just ask me anything. I'm here to help.
-              </p>
+              {hasSignedUp ? (
+                <>
+                  <h3 className="text-xl sm:text-2xl font-medium text-black mb-4">
+                    Waiting for beta approval
+                  </h3>
+                  <p className="text-base sm:text-lg text-gray-600 max-w-lg mx-auto leading-relaxed px-4">
+                    Thanks for signing up! We're reviewing your request and will notify you via email once you've been approved for beta access.
+                  </p>
+                </>
+              ) : (
+                <>
+                  <h3 className="text-xl sm:text-2xl font-medium text-black mb-4">
+                    How can I help?
+                  </h3>
+                  <p className="text-base sm:text-lg text-gray-600 max-w-lg mx-auto leading-relaxed px-4">
+                    Just ask me anything. I'm here to help.
+                  </p>
+                </>
+              )}
             </div>
           )}
           
@@ -199,24 +228,24 @@ const ChatInterface: React.FC = () => {
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
                 onKeyDown={handleKeyPress}
-                placeholder="Ask me anything..."
+                placeholder={hasBetaAccess ? "Ask me anything..." : hasSignedUp ? "Waiting for beta approval..." : "Join the beta to start chatting..."}
                 rows={1}
                 className="input-field text-base resize-none min-h-[3.5rem] max-h-32 py-4"
-                disabled={isLoading}
+                disabled={isLoading || !hasBetaAccess}
               />
             </div>
             
             <button
               onClick={() => fileInputRef.current?.click()}
               className="w-12 h-12 flex items-center justify-center text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-xl transition-all duration-200 active:scale-95"
-              disabled={isLoading}
+              disabled={isLoading || !hasBetaAccess}
             >
               <PhotoIcon className="h-6 w-6" />
             </button>
-            
+
             <button
               onClick={handleSendMessage}
-              disabled={isLoading || (!inputValue.trim() && !selectedFile)}
+              disabled={isLoading || !hasBetaAccess || (!inputValue.trim() && !selectedFile)}
               className="w-12 h-12 bg-gradient-to-r from-brand-500 to-brand-600 text-white rounded-xl hover:shadow-apple-lg disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 active:scale-95 flex items-center justify-center"
             >
               <PaperAirplaneIcon className="h-6 w-6" />
@@ -232,6 +261,10 @@ const ChatInterface: React.FC = () => {
           />
         </div>
       </div>
+
+      {showBetaPopup && (
+        <BetaSignupPopup onSignupSuccess={handleBetaSignupSuccess} />
+      )}
     </div>
   );
 };

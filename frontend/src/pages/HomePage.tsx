@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import ComingSoonPopup from '../components/ComingSoonPopup';
 
 const HomePage: React.FC = () => {
+  const [isComingSoonPopupOpen, setIsComingSoonPopupOpen] = useState(false);
+
   return (
     <div className="min-h-screen bg-white overflow-x-hidden">
       {/* Navigation */}
@@ -21,15 +24,14 @@ const HomePage: React.FC = () => {
             
             <div className="hidden md:flex items-center space-x-8">
               <a href="#how" className="text-gray-600 hover:text-black font-normal">How it works</a>
-              <a href="#examples" className="text-gray-600 hover:text-black font-normal">Examples</a>
               <a href="#pricing" className="text-gray-600 hover:text-black font-normal">Pricing</a>
               <Link to="/chat" className="text-gray-600 hover:text-black font-normal">Try it</Link>
             </div>
 
             <div className="flex items-center space-x-4">
-              <button className="bg-black text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-800 transition-colors">
+              <Link to="/chat" className="bg-black text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-800 transition-colors">
                 Start free
-              </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -247,9 +249,9 @@ const HomePage: React.FC = () => {
                   </li>
                 </ul>
                 
-                <button className="w-full border border-gray-300 text-gray-700 px-6 py-3 rounded-lg font-medium hover:bg-gray-50 transition-colors">
+                <Link to="/chat" className="w-full border border-gray-300 text-gray-700 px-6 py-3 rounded-lg font-medium hover:bg-gray-50 transition-colors inline-block text-center">
                   Start Free Trial
-                </button>
+                </Link>
               </div>
             </div>
 
@@ -302,9 +304,9 @@ const HomePage: React.FC = () => {
                   </li>
                 </ul>
                 
-                <button className="w-full bg-black text-white px-6 py-3 rounded-lg font-medium hover:bg-gray-800 transition-colors">
+                <Link to="/chat" className="w-full bg-black text-white px-6 py-3 rounded-lg font-medium hover:bg-gray-800 transition-colors inline-block text-center">
                   Start Free Trial
-                </button>
+                </Link>
               </div>
             </div>
 
@@ -350,9 +352,9 @@ const HomePage: React.FC = () => {
                   </li>
                 </ul>
                 
-                <button className="w-full border border-gray-300 text-gray-700 px-6 py-3 rounded-lg font-medium hover:bg-gray-50 transition-colors">
+                <a href="mailto:team@zonda.one" className="w-full border border-gray-300 text-gray-700 px-6 py-3 rounded-lg font-medium hover:bg-gray-50 transition-colors inline-block text-center">
                   Contact Sales
-                </button>
+                </a>
               </div>
             </div>
           </div>
@@ -376,7 +378,10 @@ const HomePage: React.FC = () => {
               Start chatting
             </Link>
             <span className="text-gray-400 hidden sm:block">or</span>
-            <button className="text-gray-600 hover:text-black font-medium">
+            <button
+              onClick={() => setIsComingSoonPopupOpen(true)}
+              className="text-gray-600 hover:text-black font-medium"
+            >
               Watch a demo
             </button>
           </div>
@@ -393,21 +398,24 @@ const HomePage: React.FC = () => {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                 </svg>
               </div>
-              <span className="font-medium text-black">ComChat</span>
+              <a href="https://zonda.one" className="font-medium text-black hover:text-gray-700 transition-colors">ZONDA</a>
             </div>
             
             <div className="flex items-center flex-wrap justify-center md:justify-end space-x-6 sm:space-x-8 text-sm">
-              <a href="mailto:hello@comchat.com" className="text-gray-600 hover:text-black">Contact</a>
-              <a href="#" className="text-gray-600 hover:text-black">Privacy</a>
-              <a href="#" className="text-gray-600 hover:text-black">Terms</a>
+              <a href="mailto:team@zonda.one" className="text-gray-600 hover:text-black">Contact</a>
             </div>
           </div>
           
           <div className="mt-6 sm:mt-8 pt-6 sm:pt-8 border-t border-gray-100 text-center">
-            <p className="text-gray-500 text-xs sm:text-sm">© 2024 ComChat. Made with care for human conversations.</p>
+            <p className="text-gray-500 text-xs sm:text-sm">© 2025 ZONDA. Made with care for human conversations.</p>
           </div>
         </div>
       </footer>
+
+      <ComingSoonPopup
+        isOpen={isComingSoonPopupOpen}
+        onClose={() => setIsComingSoonPopupOpen(false)}
+      />
     </div>
   );
 };
