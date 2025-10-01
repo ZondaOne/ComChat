@@ -9,6 +9,8 @@ interface BetaSignupPopupProps {
 const BetaSignupPopup: React.FC<BetaSignupPopupProps> = ({ onSignupSuccess }) => {
   const [email, setEmail] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [alreadyRegistered, setAlreadyRegistered] = useState(false);
+  const [subscribeNewsletter, setSubscribeNewsletter] = useState(true);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -37,17 +39,43 @@ const BetaSignupPopup: React.FC<BetaSignupPopupProps> = ({ onSignupSuccess }) =>
 
       const sql = neon(dbUrl);
 
-      // Check if email already exists
-      const existing = await sql`SELECT email FROM beta_signups WHERE email = ${email}`;
+      // Check if email already exists for this product
+      const existing = await sql`
+        SELECT s.id, sp.beta_access
+        FROM signups s
+        LEFT JOIN signup_products sp ON s.id = sp.signup_id AND sp.product_name = 'ComChat'
+        WHERE s.email = ${email}
+      `;
 
-      if (existing.length > 0) {
-        toast.error('This email is already signed up!');
+      if (existing.length > 0 && existing[0].beta_access) {
+        setAlreadyRegistered(true);
         setIsSubmitting(false);
         return;
       }
 
-      // Save to Neon DB
-      await sql`INSERT INTO beta_signups (email, created_at) VALUES (${email}, NOW())`;
+      // Insert or get signup
+      let signupId: number;
+
+      if (existing.length > 0) {
+        // Email exists, just add product
+        signupId = existing[0].id;
+      } else {
+        // New signup
+        const newSignup = await sql`
+          INSERT INTO signups (email, created_at)
+          VALUES (${email}, NOW())
+          RETURNING id
+        `;
+        signupId = newSignup[0].id;
+      }
+
+      // Insert product signup
+      await sql`
+        INSERT INTO signup_products (signup_id, product_name, beta_access, newsletter_subscribe, signed_up_at)
+        VALUES (${signupId}, 'ComChat', true, ${subscribeNewsletter}, NOW())
+        ON CONFLICT (signup_id, product_name)
+        DO UPDATE SET beta_access = true, newsletter_subscribe = ${subscribeNewsletter}
+      `;
 
       // Send email notification via Web3Forms
       const formData = new FormData();
@@ -81,19 +109,41 @@ const BetaSignupPopup: React.FC<BetaSignupPopupProps> = ({ onSignupSuccess }) =>
       <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
 
       <div className="relative bg-white rounded-2xl shadow-2xl max-w-md w-full mx-4 p-8 animate-scale-in">
-        <div className="text-center mb-8">
-          <div className="w-16 h-16 bg-black rounded-2xl mx-auto flex items-center justify-center mb-6">
-            <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-            </svg>
+        {alreadyRegistered ? (
+          <div className="text-center">
+            <div className="w-16 h-16 bg-green-100 rounded-2xl mx-auto flex items-center justify-center mb-6">
+              <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <h2 className="text-2xl font-medium text-black mb-3">
+              You're already on the list!
+            </h2>
+            <p className="text-gray-600 leading-relaxed mb-8">
+              We've got your email. We'll notify you as soon as ComChat is ready for you.
+            </p>
+            <button
+              onClick={() => window.location.href = '/'}
+              className="w-full bg-black text-white py-3 px-4 rounded-lg font-medium hover:bg-gray-800 transition-colors"
+            >
+              Back to homepage
+            </button>
           </div>
-          <h2 className="text-2xl font-medium text-black mb-3">
-            Join the beta
-          </h2>
-          <p className="text-gray-600 leading-relaxed">
-            ComChat is currently in beta. Enter your email to get early access and be the first to experience truly human-like chatbots.
-          </p>
-        </div>
+        ) : (
+          <>
+            <div className="text-center mb-8">
+              <div className="w-16 h-16 bg-black rounded-2xl mx-auto flex items-center justify-center mb-6">
+                <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                </svg>
+              </div>
+              <h2 className="text-2xl font-medium text-black mb-3">
+                Join the beta
+              </h2>
+              <p className="text-gray-600 leading-relaxed">
+                ComChat is currently in beta. Enter your email to get early access and be the first to experience truly human-like chatbots.
+              </p>
+            </div>
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
@@ -112,6 +162,20 @@ const BetaSignupPopup: React.FC<BetaSignupPopupProps> = ({ onSignupSuccess }) =>
             />
           </div>
 
+          <div className="flex items-start">
+            <input
+              type="checkbox"
+              id="newsletter"
+              checked={subscribeNewsletter}
+              onChange={(e) => setSubscribeNewsletter(e.target.checked)}
+              className="mt-1 w-4 h-4 text-black border-gray-300 rounded focus:ring-black"
+              disabled={isSubmitting}
+            />
+            <label htmlFor="newsletter" className="ml-3 text-sm text-gray-700">
+              Subscribe to Zonda newsletter for updates and product news
+            </label>
+          </div>
+
           <button
             type="submit"
             disabled={isSubmitting}
@@ -127,10 +191,8 @@ const BetaSignupPopup: React.FC<BetaSignupPopupProps> = ({ onSignupSuccess }) =>
             )}
           </button>
         </form>
-
-        <p className="text-xs text-gray-500 text-center mt-6">
-          We'll only use your email to notify you when ComChat is ready. No spam, ever.
-        </p>
+          </>
+        )}
       </div>
     </div>
   );
