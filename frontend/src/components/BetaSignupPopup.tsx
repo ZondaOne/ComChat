@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import toast from 'react-hot-toast';
+import { neon } from '@neondatabase/serverless';
 
 interface BetaSignupPopupProps {
   onSignupSuccess: () => void;
@@ -25,11 +26,45 @@ const BetaSignupPopup: React.FC<BetaSignupPopupProps> = ({ onSignupSuccess }) =>
     setIsSubmitting(true);
 
     try {
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      const dbUrl = process.env.REACT_APP_NEON_DATABASE_URL;
+
+      if (!dbUrl) {
+        console.error('Missing REACT_APP_NEON_DATABASE_URL');
+        toast.error('Configuration error. Please contact support.');
+        setIsSubmitting(false);
+        return;
+      }
+
+      const sql = neon(dbUrl);
+
+      // Check if email already exists
+      const existing = await sql`SELECT email FROM beta_signups WHERE email = ${email}`;
+
+      if (existing.length > 0) {
+        toast.error('This email is already signed up!');
+        setIsSubmitting(false);
+        return;
+      }
+
+      // Save to Neon DB
+      await sql`INSERT INTO beta_signups (email, created_at) VALUES (${email}, NOW())`;
+
+      // Send email notification via Web3Forms
+      const formData = new FormData();
+      formData.append('access_key', process.env.REACT_APP_WEB3FORMS_KEY || '');
+      formData.append('subject', 'New Beta Signup - ComChat');
+      formData.append('from_name', 'ComChat Beta');
+      formData.append('message', `New beta signup from: ${email}\n\nTimestamp: ${new Date().toISOString()}`);
+
+      await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: formData
+      });
 
       toast.success('Thanks for signing up! We\'ll be in touch soon.');
       onSignupSuccess();
     } catch (error) {
+      console.error('Signup error:', error);
       toast.error('Something went wrong. Please try again.');
     } finally {
       setIsSubmitting(false);
