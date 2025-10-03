@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 import { neon } from '@neondatabase/serverless';
+import Logo from './common/Logo';
 
 interface BetaSignupPopupProps {
   onSignupSuccess: () => void;
@@ -133,9 +134,7 @@ const BetaSignupPopup: React.FC<BetaSignupPopupProps> = ({ onSignupSuccess }) =>
           <>
             <div className="text-center mb-8">
               <div className="w-16 h-16 bg-black rounded-2xl mx-auto flex items-center justify-center mb-6">
-                <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-                </svg>
+                <Logo className="text-white" width="48" height="48" />
               </div>
               <h2 className="text-2xl font-medium text-black mb-3">
                 Join the beta

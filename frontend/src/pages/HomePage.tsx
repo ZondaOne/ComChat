@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import ComingSoonPopup from '../components/ComingSoonPopup';
+import Logo from '../components/common/Logo';
 
 const HomePage: React.FC = () => {
   const [isComingSoonPopupOpen, setIsComingSoonPopupOpen] = useState(false);
@@ -12,11 +13,7 @@ const HomePage: React.FC = () => {
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-3">
-              <div className="w-7 h-7 rounded-xl bg-black flex items-center justify-center">
-                <svg className="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-                </svg>
-              </div>
+              <Logo className="text-black" width="28" height="28" />
               <h1 className="text-lg font-medium text-black">
                 ComChat
               </h1>
@@ -393,11 +390,7 @@ const HomePage: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="flex items-center space-x-3 mb-4 md:mb-0">
-              <div className="w-6 h-6 rounded-lg bg-black flex items-center justify-center">
-                <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-                </svg>
-              </div>
+              <Logo className="text-black" width="24" height="24" />
               <a href="https://zonda.one" className="font-medium text-black hover:text-gray-700 transition-colors">ZONDA</a>
             </div>
             

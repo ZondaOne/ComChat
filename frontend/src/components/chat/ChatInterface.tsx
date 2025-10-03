@@ -7,6 +7,7 @@ import { chatService } from '../../services/chatService';
 import MessageBubble from './MessageBubble';
 import TypingIndicator from './TypingIndicator';
 import BetaSignupPopup from '../BetaSignupPopup';
+import Logo from '../common/Logo';
 
 interface Message {
   id: string;
@@ -125,9 +126,7 @@ const ChatInterface: React.FC = () => {
         <div className="flex items-center justify-between max-w-4xl mx-auto">
           <div className="flex items-center space-x-4">
             <div className="w-10 h-10 sm:w-12 sm:h-12 bg-black rounded-xl flex items-center justify-center">
-              <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-              </svg>
+              <Logo className="text-white" width="36" height="36" />
             </div>
             <div>
               <h1 className="text-lg sm:text-xl font-medium text-black">
@@ -158,9 +157,7 @@ const ChatInterface: React.FC = () => {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 ) : (
-                  <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 0 012 2v8a2 2 0 01-2 2h-4l-4 4z" />
-                  </svg>
+                  <Logo className="text-white" width="64" height="64" />
                 )}
               </div>
               {hasSignedUp ? (
